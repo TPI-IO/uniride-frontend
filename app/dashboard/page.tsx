@@ -1,34 +1,39 @@
-import { Suspense } from "react"
+'use client';  // <-- Indica que es Client Component
+
+import {Suspense} from "react"
 import DashboardStats from "@/components/dashboard/dashboard-stats"
 import CurrentRide from "@/components/dashboard/current-ride"
 import RecentRides from "@/components/dashboard/recent-rides"
 import QuickActions from "@/components/dashboard/quick-actions"
 import LoadingSpinner from "@/components/ui/loading-spinner"
-import { SidebarTrigger } from "@/components/ui/sidebar"
+import {SidebarTrigger} from "@/components/ui/sidebar"
+import {useAuthGuard} from "@/hooks/useAuthGuard";
 
 export default function DashboardPage() {
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-4">
-        <SidebarTrigger />
-        <h1 className="text-2xl font-bold md:text-3xl">Dashboard</h1>
-      </div>
+    useAuthGuard(); // Esto bloquea el acceso si no hay usuario
 
-      <Suspense fallback={<LoadingSpinner />}>
-        <DashboardStats />
-      </Suspense>
+    return (
+        <div className="space-y-6">
+            <div className="flex items-center gap-4">
+                <SidebarTrigger/>
+                <h1 className="text-2xl font-bold md:text-3xl">Dashboard</h1>
+            </div>
 
-      <QuickActions />
+            <Suspense fallback={<LoadingSpinner/>}>
+                <DashboardStats/>
+            </Suspense>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Suspense fallback={<LoadingSpinner />}>
-          <CurrentRide />
-        </Suspense>
+            <QuickActions/>
 
-        <Suspense fallback={<LoadingSpinner />}>
-          <RecentRides />
-        </Suspense>
-      </div>
-    </div>
-  )
+            <div className="grid gap-6 md:grid-cols-2">
+                <Suspense fallback={<LoadingSpinner/>}>
+                    <CurrentRide/>
+                </Suspense>
+
+                <Suspense fallback={<LoadingSpinner/>}>
+                    <RecentRides/>
+                </Suspense>
+            </div>
+        </div>
+    )
 }
