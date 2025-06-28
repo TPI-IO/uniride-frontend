@@ -179,7 +179,14 @@ export default function DriverProfile({ driverId }: { driverId: string }) {
               <Label>Calificación</Label>
               <div className="flex space-x-1">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <button key={star} type="button" onClick={() => setRating(star)} className="focus:outline-none">
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => setRating(star)}
+                    className="focus:outline-none"
+                    data-cy={`star-rating-${star}`}
+                    aria-label={`Calificar con ${star} estrella${star > 1 ? 's' : ''}`}
+                  >
                     <Star className={`h-8 w-8 ${star <= rating ? "text-amber-500 fill-amber-500" : "text-gray-300"}`} />
                   </button>
                 ))}
