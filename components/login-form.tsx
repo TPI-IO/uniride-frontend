@@ -57,6 +57,7 @@ export default function LoginForm() {
               value={legajo}
               onChange={(e) => setLegajo(e.target.value)}
               required
+              data-cy="input-legajo"
             />
           </div>
           <div className="space-y-2">
@@ -68,6 +69,7 @@ export default function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              data-cy="input-password"
             />
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
@@ -95,7 +97,12 @@ export default function LoginForm() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full bg-amber-500 hover:bg-amber-600" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full bg-amber-500 hover:bg-amber-600"
+            disabled={isLoading}
+            data-cy="boton-login"
+          >
             {isLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
           </Button>
         </CardFooter>
