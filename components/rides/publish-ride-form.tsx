@@ -28,6 +28,8 @@ export default function PublishRideForm() {
   const [estimatedArrivalTime, setEstimatedArrivalTime] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [showOriginMap, setShowOriginMap] = useState(false)
+  const [showDestinationMap, setShowDestinationMap] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -57,6 +59,18 @@ export default function PublishRideForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleOriginBlur = () => {
+    if (formData.origin.trim()) {
+      setShowOriginMap(true)
+    }
+  }
+
+  const handleDestinationBlur = () => {
+    if (formData.destination.trim()) {
+      setShowDestinationMap(true)
+    }
   }
 
   const handleRadioChange = (value: string) => {
@@ -173,18 +187,20 @@ export default function PublishRideForm() {
                 placeholder="Ej: Calle Principal 123, Barrio Norte"
                 value={formData.origin}
                 onChange={handleChange}
+                onBlur={handleOriginBlur}
                 required
               />
 
-              {formData.origin && (
+              {showOriginMap && formData.origin && (
                 <div className="mt-2">
-                  <iframe
-                    width="100%"
-                    height="200"
-                    frameBorder="0"
-                    style={{ border: 0 }}
-                    src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(formData.origin)}`}
-                    allowFullScreen
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3368.084773069735!2d-63.24075512463495!3d-32.41688724532867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95cc42ef83fc99bb%3A0xb4e39183240c5e0b!2sSantiago%20del%20Estero%201122%2C%20X5900ATD%20Villa%20Mar%C3%ADa%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1751243087576!5m2!1ses!2sar" 
+                    width="100%" 
+                    height="200" 
+                    style={{border:0}} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
                   ></iframe>
                 </div>
               )}
@@ -201,18 +217,20 @@ export default function PublishRideForm() {
                 placeholder="Ej: Calle Principal 123, Barrio Norte"
                 value={formData.destination}
                 onChange={handleChange}
+                onBlur={handleDestinationBlur}
                 required
               />
 
-              {formData.destination && (
+              {showDestinationMap && formData.destination && (
                 <div className="mt-2">
-                  <iframe
-                    width="100%"
-                    height="200"
-                    frameBorder="0"
-                    style={{ border: 0 }}
-                    src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(formData.destination)}`}
-                    allowFullScreen
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3368.084773069735!2d-63.24075512463495!3d-32.41688724532867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95cc42ef83fc99bb%3A0xb4e39183240c5e0b!2sSantiago%20del%20Estero%201122%2C%20X5900ATD%20Villa%20Mar%C3%ADa%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1751243087576!5m2!1ses!2sar" 
+                    width="100%" 
+                    height="200" 
+                    style={{border:0}} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
                   ></iframe>
                 </div>
               )}
