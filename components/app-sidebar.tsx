@@ -167,12 +167,18 @@ export function AppSidebar() {
                   )}
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-80 z-[100]" sideOffset={5} side="right">
-                <div className="flex justify-between items-center p-2 border-b">
-                  <h4 className="font-medium">Notificaciones</h4>
+              <DropdownMenuContent align="end" className="w-80 z-[100]" sideOffset={5} side="bottom">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0 p-2 border-b">
+                  <h4 className="font-medium text-sm sm:text-base">Notificaciones</h4>
                   {unreadCount > 0 && (
-                    <Button variant="ghost" size="sm" onClick={handleMarkAllAsRead}>
-                      Marcar todas como leídas
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleMarkAllAsRead}
+                      className="self-start sm:self-auto text-xs sm:text-sm px-2 py-1 h-auto sm:h-8"
+                    >
+                      <span className="hidden sm:inline">Marcar todas como leídas</span>
+                      <span className="sm:hidden">Marcar leídas</span>
                     </Button>
                   )}
                 </div>
